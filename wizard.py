@@ -1,5 +1,4 @@
 import random
-
 # Base Character class
 class Character:
     def __init__(self, name, health, attack_power):
@@ -9,12 +8,12 @@ class Character:
         self.max_health = health  
 
     def attack(self, opponent):
-        damage = random.randint(self.attack_power - 5, self.attack_power + 5)#####################
+        damage = random.randint(self.attack_power - 5, self.attack_power + 5)
         opponent.health -= damage
         print(f"{self.name} attacks {opponent.name} for {damage} damage!")
         if opponent.health <= 0:
             print(f"{opponent.name} has been defeated!")
-#####################################
+
     def heal(self):
         heal_amount = random.randint(10, 20)
         self.health = min(self.max_health, self.health + heal_amount)
@@ -29,7 +28,6 @@ class Warrior(Character):
         super().__init__(name, health=140, attack_power=25)
         self.boost_turns = 0
 
-        #####################################
     def kamikaze(self, opponent):
         damage = self.health
         opponent.health = int(opponent.health * 0.25)
@@ -48,7 +46,6 @@ class Mage(Character):
         super().__init__(name, health=100, attack_power=35)
         self.decoy = False
 
-         #####################################
 
     def curse(self, opponent):
         opponent.attack_power = int(opponent.attack_power * 0.9)
@@ -68,7 +65,6 @@ class EvilWizard(Character):
         print(f"{self.name} regenerates 5 health! Current health: {self.health}")
 
 # Create Archer class
-#####################
 class Archer(Character):
     def __init__(self, name):
         super().__init__(name, health=110, attack_power=10)
@@ -88,7 +84,6 @@ class Archer(Character):
 
 
 # Create Paladin class 
-######################
 class Paladin(Character):
     def __init__(self, name):
         super().__init__(name, health=160, attack_power=30)
@@ -105,10 +100,6 @@ class Paladin(Character):
     def divine_shield(self):
         self.shielding = True
         print(f"{self.name} has activated Divine Shield! Incoming damage will be deflected back 15% to the attacker.")
-
-
-
-
 
 
 def create_character():
@@ -146,7 +137,6 @@ def battle(player, wizard):
         if choice == '1':
             player.attack(wizard)
         elif choice == '2':
-            ################## Implement special abilities
             if isinstance(player, Archer):
               print("1. Quick Shot")
               print("2. Evade")
@@ -182,22 +172,18 @@ def battle(player, wizard):
             else:
                   print("Invalid option")
         elif choice == '3':
-            ################### Implement heal method
             player.heal()
         elif choice == '4':
             player.display_stats()
         else:
             print("Invalid choice. Try again.")
-
         if wizard.health > 0:
-            ############################
             if isinstance(player, Warrior) and player.boost_turns > 0:
                 player.boost_turns -= 1
                 if player.boost_turns == 0:
                     print(f"{player.name}'s Battle Boost has been depleted.")
                     player.attack_power = 25
             wizard.regenerate()
-            ###########################
             if hasattr(player, 'evading') and player.evading:
                 print(f"{player.name} evaded the attack!")
                 player.evading = False
